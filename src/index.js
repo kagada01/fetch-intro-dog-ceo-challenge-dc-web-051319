@@ -29,21 +29,36 @@ function fetchDogBreeds() {
   fetch('https://dog.ceo/api/breeds/list/all')
     .then(response => response.json())
     .then(dogsObj => {
-      for (let breed in dogsObj.message) {
-        renderDogBreeds(breed)
+      let breeds = dogsObj.message
+      for (let breed in breeds) {
+        let subBreeds = []
+        if (breeds[breed].length > 0) {
+          subBreeds = breeds[breed]
+        }
+        renderDogBreeds(breed, subBreeds)
       }
     })
 }
 
-function renderDogBreeds(breed) {
+function renderDogBreeds(breed, subBreeds) {
   let breedListItem = document.createElement("li")
-debugger
-    if ((typeof breed) !== 'string') {
-  debugger
-      breed.values.forEach()
+  breedListItem.addEventListener("click", (event) => {
+    breedListItem.style.color.rand
+})
+    breedListItem.innerText = `${breed}`
+    if (subBreeds.length > 0) {
+      let subBreedList = document.createElement("ul")
+      subBreeds.forEach(subBreed => {
+        let subBreedListItem = document.createElement("li")
+        subBreedListItem.innerText = subBreed
+        subBreedList.appendChild(breedListItem)
+        debugger
+
+       })
+       breedListItem.appendChild(subBreedList)
 
     }
-    breedListItem.innerText = `${breed}`
+
   // debugger
     dogBreedList.appendChild(breedListItem)
 
